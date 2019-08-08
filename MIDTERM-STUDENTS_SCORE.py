@@ -1,4 +1,4 @@
-op = open('c:/Users/suhao.xu/desktop/MIDTERM01.TXT','r')
+op = open('MIDTERM01.TXT','r')
 # 逻辑为：
 # 1. 打开文件读取每一行，表头行添加名次，总分，平均分和排序用的数字0，
 # 2. 求每个人的平均分和总分，最后添加排序用的数字1
@@ -36,7 +36,7 @@ print(rs)
 score_avg = ['平均']
 for m in range(1, len(rs[0])-2):
     avg_subject = 0
-    for n in range(1, len(rs)-1):
+    for n in range(0, len(rs)):
         avg_subject += float(rs[n][m])
     score_avg.append(round(avg_subject/(len(rs)),1))
 score_avg.extend([round(sum(score_avg[1:-1])/(len(score_avg[1:-1])-1)),
@@ -55,7 +55,7 @@ rs.insert(0, table_index)
 print (rs)
 
 # wr_str为最后写入文件用的长字符串，rk为“名次”列的序号
-wr = open('c:/Users/suhao.xu/desktop/MIDTERM01_RS.TXT','w')
+wr = open('MIDTERM01_RS.TXT','w')
 wr_str=''
 rk = 0
 for x in range(len(rs)):
