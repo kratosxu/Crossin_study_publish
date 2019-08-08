@@ -1,24 +1,36 @@
 import random as rd
+import os
+
 username = input('请输入您的名字：')
 dictionary = {}
-with open ('c:/users/suhao.xu/desktop/game.txt', 'r') as f:
-    for i in f.readlines():
-        a = str(i).split()
-        dictionary[a[4]] = [a[0], a[1], a[2], a[3]]
+if os.path.exists('game.txt')==True:
+    with open ('game.txt', 'r', encoding='gbk') as f:
+        for i in f.readlines():
+            a = str(i).split()
+            dictionary[a[4]] = [a[0], a[1], a[2], a[3]]
 
-    if username in dictionary:
-        total_games = int(a[0])
-        fastest = int(a[1])
-        guess_times = int(a[2])
-        win_times = int(a[3])
-        print('欢迎回来%s，祝你游戏愉快！' % (username))
-    else:
-        total_games = 0
-        fastest = 6
-        guess_times = 0
-        win_times = 0
-        dictionary[username]= ['0', '0', '0', '0']
-        print('欢迎你%s，准备好猜数字的游戏了吗？' % (username))
+        if username in dictionary:
+            total_games = int(a[0])
+            fastest = int(a[1])
+            guess_times = int(a[2])
+            win_times = int(a[3])
+            print('欢迎回来%s，祝你游戏愉快！' % (username))
+        else:
+            total_games = 0
+            fastest = 6
+            guess_times = 0
+            win_times = 0
+            dictionary[username]= ['0', '0', '0', '0']
+            print('欢迎你%s，准备好猜数字的游戏了吗？' % (username))
+else:
+    op = open('game.txt', 'w')
+    total_games = 0
+    fastest = 6
+    guess_times = 0
+    win_times = 0
+    dictionary[username] = ['0', '0', '0', '0']
+    print('欢迎你%s，准备好猜数字的游戏了吗？' % (username))
+    op.close()
 
 if total_games != 0:
     avg_times = guess_times / float(total_games)
@@ -28,12 +40,13 @@ else:
 
 def number_input():
     while True:
+        num = input('请输入10以内的整数数字：')
         try:
-            num = int(input('请输入100以内的整数数字：'))
-            if num>=1 and num<=100:
+            num = int(num)
+            if num >= 1 and num <= 10:
                 break
             else:
-                num=0/0
+                print('不要调皮！看清提示哦！')
         except:
             print('不要调皮！看清提示哦！')
     return num
@@ -86,7 +99,7 @@ print ('你一共玩了%d次游戏\n平均%.1f次猜对\n最好成绩是%d次'
 
 
 
-with open ('c:/users/suhao.xu/desktop/game.txt', 'w') as f:
+with open ('game.txt', 'w', encoding = 'gbk') as f:
     writting = ''
     for i in dictionary.keys():
         if i == username:
